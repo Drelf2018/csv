@@ -1,10 +1,13 @@
-# csv
+package csv_test
 
-使用结构体读写 csv 文件
+import (
+	"strings"
+	"testing"
+	"time"
 
-### 使用
+	"github.com/Drelf2018/csv"
+)
 
-```go
 type QTime time.Time
 
 func (q QTime) MarshalCSV() (string, error) {
@@ -104,14 +107,3 @@ func TestMarshal(t *testing.T) {
 	}
 	t.Log(string(p))
 }
-```
-
-#### 控制台
-
-```
-时间,类型,金额,备注,标签
-2022/7/12 21:20,支出,28.58,去肯德基吃汉堡（此行数据是示例，可以删除）,种草
-2022/7/8 22:15,收入,1000,7月份工资（此行数据是示例，可以删除）,#老婆#旅行
-2022/7/8 10:10,转账,200,支付宝提现1000元到银行卡（此行数据是示例，可以删除）,#冲动消费#拔草
-2022/7/8 22:15,支出,12.5,茶百道（此行数据是示例，可以删除）,
-```
