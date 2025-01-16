@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"reflect"
+	"strings"
 	"unsafe"
 
 	stdcsv "encoding/csv"
@@ -20,6 +21,9 @@ func UnmarshalCSVReader[T any](reader *stdcsv.Reader) ([]T, error) {
 	header, rerr := reader.Read()
 	if rerr != nil {
 		return nil, rerr
+	}
+	if len(header) != 0 {
+		header[0] = strings.TrimPrefix(header[0], "\xef\xbb\xbf")
 	}
 
 	var i any = *new(T)
